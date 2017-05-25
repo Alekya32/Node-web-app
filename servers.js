@@ -1,6 +1,9 @@
 var express=require("express");
 var app=express();
 var router=express.Router();
+var importData=require("./import.js")
+
+console.log(importData)
 
 /*app.get("/",function(request,response){
 	response.json({message:"Good Morning........"})

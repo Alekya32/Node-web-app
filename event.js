@@ -2,31 +2,29 @@ var EventEmitter=require("events").EventEmitter;
 var emitter=new EventEmitter();
 
 var fs=require("fs")
-var path=require("path")	//Joining path
+var path=require("path")
 
-/*var filepath=__dirname+"/sample.txt"*/
+var filepath=path.join(__dirname,"EventEmitter.json");
+console.log(filepath);
 
-var filepath=path.join(__dirname,"sample23.txt")//Joining path
-console.log(filepath)
-
-emitter.on("start_reading",function(filePath){		//on event to read file
+emitter.on("start_reading",function(filePath){		
 
 
 	console.log("start reading the file...!!")		
 
-	fs.readFile(filepath,"utf-8",function(err,data){ //reading file utf-8 to see data in string format
+	fs.readFile(filepath,"utf-8",function(err,data){ 
 		if(err){
-			/*console.log(err);*/
+			
 			emitter.emit("error",err)
 			return ;
 		}
-		/*console.log(data)*/
+		
 		emitter.emit("print_content",data);
 	})
 })
-emitter.on("print_content",function(data){			//printing file
+emitter.on("print_content",function(data){			
 	console.log(data);
-	emitter.emit("done","Successfully done reading the file")//invokes done event
+	emitter.emit("done","Successfully done reading the file")
 })
 
 emitter.on("error",function(message){
